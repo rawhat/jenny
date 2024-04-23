@@ -1,0 +1,19 @@
+---
+version: 1.1.3
+title: JSON decoder for type with less than 9 fields
+file: ./test/jenny_test.gleam
+test_name: json_decoder_less_than_9_test
+---
+pub fn user_from_json(str: String) -> Result(User, json.DecodeError) {
+  json.decode(
+    str,
+    dynamic.decode5(
+      User,
+      dynamic.field("v0", dynamic.string),
+      dynamic.field("v1", dynamic.string),
+      dynamic.field("v2", dynamic.string),
+      dynamic.field("v3", dynamic.string),
+      dynamic.field("v4", dynamic.string),
+    )
+  )
+}
